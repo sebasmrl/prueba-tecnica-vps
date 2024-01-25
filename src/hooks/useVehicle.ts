@@ -11,16 +11,17 @@ interface Filter{
 
 export const useVehicle = <T>( { tipo, codigoMarca, codigoModelo }: Filter ) => {
 
-
-    console.log(tipo, codigoMarca, codigoModelo)
+    //console.log(tipo, codigoMarca, codigoModelo)
     let uri = `${tipo}/marcas`;
     const queryKey: string[] = ["vehiculo", tipo];
 
 
-    if(codigoMarca ){
+    if( codigoMarca ){
       uri= `${uri}/${codigoMarca}/modelos`;
       queryKey.push(codigoMarca);
       queryKey.push("modelos");
+      //console.log("codigoMarca");
+
     }
 
 
@@ -28,6 +29,7 @@ export const useVehicle = <T>( { tipo, codigoMarca, codigoModelo }: Filter ) => 
       uri= `${uri}/${codigoModelo}/anos`;
       queryKey.push(codigoModelo);
       queryKey.push("anos");
+      //console.log("codigoModelo");
     } 
 
 
@@ -35,8 +37,11 @@ export const useVehicle = <T>( { tipo, codigoMarca, codigoModelo }: Filter ) => 
         queryKey: queryKey,
         queryFn : async()=>{
           const { data } = await estimateVehicleApi.get<T>(uri);
+          //console.log("peticion ejecutada")
           return data;
         },
+        refetchInterval: 10000*20,
+        retryDelay: 1000*20
       })
 
 
@@ -53,18 +58,21 @@ export const useVehicle = <T>( { tipo, codigoMarca, codigoModelo }: Filter ) => 
 
 export const useVehicleInformation = (dataForm: DataForm)=>{
 
+  //console.log('vehicleInformationExecute')
   let uri ='';
   if(dataForm.marca && dataForm.tipo && dataForm.modelo && dataForm.anos){
     uri=`${dataForm.tipo}/marcas/${dataForm.marca}/modelos/${dataForm.modelo}/anos/${dataForm.anos}`;
   }
 
   const queryVehicle = useQuery({
-    queryKey: [ uri ], 
+    queryKey: [ dataForm], 
     queryFn: async()=>{
       const { data } = await estimateVehicleApi.get<VehicleInfo>(uri);
       return data ;
-    }
-  })
+    },
+    refetchInterval: 10000*20,
+    retryDelay: 1000*20
+  }) 
 
   return {
     dataVehicle: queryVehicle.data,

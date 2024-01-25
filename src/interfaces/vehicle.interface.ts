@@ -3,7 +3,8 @@
 export enum TiposVehiculo{
     carros = 'carros',
     motos = 'motos',
-    camiones= 'caminhoes'
+    camiones= 'caminhoes',
+    empty= ''
 }
 
 export interface Marca {

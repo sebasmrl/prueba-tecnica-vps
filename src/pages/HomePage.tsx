@@ -1,5 +1,5 @@
 import { Footer, InfoEstimateVehicle, InputOpcionVehicle, Navbar } from "../components"
-import { Loader } from "../shared/Loader";
+//import { Loader } from "../shared/Loader";
 import { useForm, useVehicle } from "../hooks"
 import { TiposVehiculo, DataForm, Marca, Modelos, Anos } from "../interfaces/vehicle.interface";
 
@@ -9,7 +9,7 @@ export const HomePage = () => {
 
 
   const {formData, handleSelectChange, reinitalizeForm }= useForm<DataForm>({
-    tipo: TiposVehiculo.camiones,
+    tipo: TiposVehiculo.empty,
     marca: '',
     modelo: '',
     anos: ''
@@ -39,9 +39,9 @@ export const HomePage = () => {
               
           <br />
 
-          { marcas.isFetching  ||modelos.isFetching || anos.isFetching
+          {/* { marcas.isFetching  ||modelos.isFetching || anos.isFetching
             && <Loader />
-           } 
+           }  */}
           <InputOpcionVehicle 
               value={ formData.tipo}
               handleChange={ handleSelectChange }

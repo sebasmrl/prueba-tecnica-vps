@@ -42,11 +42,12 @@ export const useForm = <T>(initialState: T) => {
         setFormData(initialState);
     }
 
+   
     return {
         formData,
         handleChange,
         handleSelectChange,
         handleSubmit,
-        reinitalizeForm
+        reinitalizeForm,
     }
 }
