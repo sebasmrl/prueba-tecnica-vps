@@ -6,7 +6,7 @@ export const TankStackProvider = ({ children }: React.PropsWithChildren) => {
     const client = new QueryClient({
         defaultOptions:{
             queries:{
-              
+              refetchOnWindowFocus: false
             }
         }
     });

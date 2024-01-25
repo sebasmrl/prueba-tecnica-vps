@@ -34,7 +34,6 @@ export interface DataForm{
     anos: string;
 }
 
-
 export interface Options{
     codigo: string;
     nome: string;

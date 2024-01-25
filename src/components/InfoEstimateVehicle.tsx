@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CurrencyResponse } from "../api/currencyApi";
 import { useVehicleInformation } from "../hooks"
 import { DataForm } from "../interfaces/vehicle.interface"
@@ -9,15 +9,15 @@ interface Props{
 
 export const InfoEstimateVehicle = ({data}:Props) => {
 
+  const { dataVehicle} = useVehicleInformation(data);
+  const conversion = CurrencyResponse.data.COP.value;
 
   const [copValue, setCopValue] = useState("");
- const { dataVehicle} = useVehicleInformation(data);
- console.log({dataVehicle})
+  useEffect(() => {    
+      setCopValue("COP "+Number(dataVehicle?.Valor.split(' ')[1].split(',')[0])*conversion);
+  }, [data, dataVehicle, conversion]);
+  
 
- const conversion = CurrencyResponse.data.COP.value;
- console.log({conversion}, CurrencyResponse)
-
- console.log('conversion:', Number(dataVehicle?.Valor.split(' ')[1].split(',')[0]) );
 
   return (
 
@@ -37,8 +37,7 @@ export const InfoEstimateVehicle = ({data}:Props) => {
                 type="button" 
                 className="self-start rounded-md bg-indigo-600  px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 onClick={ ()=>{
-                  //const $span = document.getElementById('cop-value');
-                  setCopValue("COP "+Number(dataVehicle?.Valor.split(' ')[1].split(',')[0])*conversion);
+                    setCopValue("COP "+Number(dataVehicle?.Valor.split(' ')[1].split(',')[0])*conversion);
                 }}
             >Convertir a pesos</button>
           </div>

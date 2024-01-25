@@ -59,7 +59,7 @@ export const useVehicleInformation = (dataForm: DataForm)=>{
   }
 
   const queryVehicle = useQuery({
-    queryKey: [ uri ], //"vehiculo", dataForm.tipo,dataForm.marca,"modelos",dataForm.modelo,"anos", dataForm.anos
+    queryKey: [ uri ], 
     queryFn: async()=>{
       const { data } = await estimateVehicleApi.get<VehicleInfo>(uri);
       return data ;
