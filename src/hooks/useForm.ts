@@ -15,7 +15,15 @@ export const useForm = <T>(initialState: T) => {
     
     const [formData, setFormData] = useState(initialState);
 
-    const handleChange = ( e: ChangeEvent<HTMLInputElement>)=>{
+    const handleChange = ( e: (ChangeEvent<HTMLInputElement> ) )=>{
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+          });
+    }
+    
+    const handleSelectChange = ( e: (ChangeEvent<HTMLSelectElement> ) )=>{
         const { name, value } = e.target;
         setFormData({
             ...formData,
@@ -30,9 +38,15 @@ export const useForm = <T>(initialState: T) => {
         await handleCallback();
     }
   
+    const reinitalizeForm = ()=>{
+        setFormData(initialState);
+    }
+
     return {
         formData,
         handleChange,
-        handleSubmit
+        handleSelectChange,
+        handleSubmit,
+        reinitalizeForm
     }
 }

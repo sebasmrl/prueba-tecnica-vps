@@ -8,10 +8,11 @@ import './index.css';
 
 
 
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+  //<React.StrictMode>
     <TankStackProvider>
       <RouterProvider router={ router }/>
     </TankStackProvider>
-  </React.StrictMode>
+  //</React.StrictMode>
 )
