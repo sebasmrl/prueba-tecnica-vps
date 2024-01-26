@@ -16,6 +16,9 @@ export default {
         8: '8',
         9: '9',
         10: '10',
+      },
+      fontSize:{
+        '10xl': '10rem'
       }
     },
   },
