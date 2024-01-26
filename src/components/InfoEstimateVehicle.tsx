@@ -11,7 +11,7 @@ interface Props{
 export const InfoEstimateVehicle = ({data}:Props) => {
 
   const { dataVehicle } = useVehicleInformation(data);
-  const conversion = CurrencyResponse.data.COP.value;
+
 
   const [copValue, setCopValue] = useState("");
 
@@ -38,8 +38,9 @@ export const InfoEstimateVehicle = ({data}:Props) => {
             <button 
                 type="button" 
                 className="self-start rounded-md bg-indigo-600  px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                onClick={ ()=>{
-                    setCopValue("COP "+(Number(dataVehicle?.Valor.split(' ')[1].split(',')[0].replace('.',''))*conversion).toFixed(2));
+                onClick={ async()=>{
+                    const conversion = await CurrencyResponse();
+                    setCopValue("COP "+(Number(dataVehicle?.Valor.split(' ')[1].split(',')[0].replace('.',''))*conversion.data.COP.value).toFixed(2));
                 }}
             >Convertir a pesos</button>
             
