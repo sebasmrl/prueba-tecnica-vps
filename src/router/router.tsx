@@ -7,5 +7,8 @@ export const router = createBrowserRouter([
     { path: '', 
         element: <HomePage />,
         errorElement: <ErrorPage />
-    }
+    },
+    { path: 'prueba-tecnica-vps',
+    element: <HomePage />,
+    errorElement: <ErrorPage />}
 ]);
